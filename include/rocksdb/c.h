@@ -706,6 +706,12 @@ enum {
 };
 extern ROCKSDB_LIBRARY_API void rocksdb_block_based_options_set_index_type(
     rocksdb_block_based_table_options_t*, int);  // uses one of the above enums
+enum {
+	rocksdb_block_based_table_data_block_index_type_binary_search = 0,
+	rocksdb_block_based_table_data_block_index_type_binary_search_and_hash = 1,
+};
+extern ROCKSDB_LIBRARY_API void rocksdb_block_based_options_set_data_block_index_type(
+		rocksdb_block_based_table_options_t*, int);  // uses one of the above enums
 extern ROCKSDB_LIBRARY_API void
 rocksdb_block_based_options_set_hash_index_allow_collision(
     rocksdb_block_based_table_options_t*, unsigned char);
@@ -1764,6 +1770,10 @@ rocksdb_approximate_memory_usage_get_mem_table_readers_total(
 extern ROCKSDB_LIBRARY_API uint64_t
 rocksdb_approximate_memory_usage_get_cache_total(
     rocksdb_memory_usage_t* memory_usage);
+
+extern ROCKSDB_LIBRARY_API void rocksdb_options_set_dump_malloc_stats(rocksdb_options_t*, int);
+
+extern ROCKSDB_LIBRARY_API void rocksdb_options_set_memtable_whole_key_filtering(rocksdb_options_t*, int);
 
 #ifdef __cplusplus
 }  /* end extern "C" */

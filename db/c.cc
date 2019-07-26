@@ -2032,6 +2032,11 @@ void rocksdb_block_based_options_set_index_type(
   options->rep.index_type = static_cast<BlockBasedTableOptions::IndexType>(v);
 }
 
+void rocksdb_block_based_options_set_data_block_index_type(
+		rocksdb_block_based_table_options_t* options, int v) {
+	options->rep.data_block_index_type = static_cast<BlockBasedTableOptions::DataBlockIndexType >(v);
+}
+
 void rocksdb_block_based_options_set_hash_index_allow_collision(
     rocksdb_block_based_table_options_t* options, unsigned char v) {
   options->rep.hash_index_allow_collision = v;
@@ -4380,6 +4385,14 @@ uint64_t rocksdb_approximate_memory_usage_get_mem_table_readers_total(
 uint64_t rocksdb_approximate_memory_usage_get_cache_total(
     rocksdb_memory_usage_t* memory_usage) {
   return memory_usage->cache_total;
+}
+
+void rocksdb_options_set_dump_malloc_stats(rocksdb_options_t* opt, int val) {
+  opt->rep.dump_malloc_stats = val;
+}
+
+void rocksdb_options_set_memtable_whole_key_filtering(rocksdb_options_t* opt, int val) {
+  opt->rep.memtable_whole_key_filtering = val;
 }
 
 // deletes container with memory usage estimates
