@@ -41,6 +41,7 @@
 #include "rocksdb/write_batch.h"
 #include "rocksdb/perf_context.h"
 #include "utilities/merge_operators.h"
+#include "rocksdb/userkv.h"
 
 #include <vector>
 #include <unordered_set>
@@ -2628,6 +2629,14 @@ void rocksdb_options_prepare_for_bulk_load(rocksdb_options_t* opt) {
 
 void rocksdb_options_set_memtable_vector_rep(rocksdb_options_t *opt) {
   opt->rep.memtable_factory.reset(new rocksdb::VectorRepFactory);
+}
+
+void rocksdb_options_set_userkv_comparator(rocksdb_options_t* opt) {
+	opt->rep.comparator = userkv::Uint64Comparator();
+}
+
+void rocksdb_options_set_userkv_merge_operator(rocksdb_options_t* opt) {
+	opt->rep.merge_operator = userkv::CreateUserKVMergeOperator();
 }
 
 void rocksdb_options_set_memtable_prefix_bloom_size_ratio(
